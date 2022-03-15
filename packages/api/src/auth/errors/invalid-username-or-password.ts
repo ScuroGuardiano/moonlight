@@ -1,9 +1,9 @@
-import { BadRequestException, HttpStatus } from "@nestjs/common";
+import { HttpStatus, UnauthorizedException } from "@nestjs/common";
 import { createApiErrorResponse } from "src/common/api-error";
 
-export default class InvalidUsernameOrPasswordException extends BadRequestException {
+export default class InvalidUsernameOrPasswordException extends UnauthorizedException {
   constructor() {
-    super(createApiErrorResponse(HttpStatus.BAD_REQUEST, [{
+    super(createApiErrorResponse(HttpStatus.UNAUTHORIZED, [{
       code: "AUTH:002",
       message: "Invalid username or password"
     }]));
