@@ -3,5 +3,5 @@ export default function getJwtExpire() {
     return process.env.JWT_EXPIRE;
   }
 
-  return "6h";
+  return "666y";
 }

@@ -1,15 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { firstValueFrom, Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { SessionService } from './services/session.service';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
-    constructor(private authService: AuthService) {
+    constructor(private sessionService: SessionService) {
         super();
     }
 
-    // Written by fucking github copilot, don't trust it!
     async canActivate(context: any) {
         const request = context.switchToHttp().getRequest();
         const authHeader = request.headers.authorization;
@@ -17,8 +16,8 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
             throw new UnauthorizedException();
         }
         const token = authHeader.split(' ')[1];
-        const isRevoken = await this.authService.isRevoked(token);
-        if (isRevoken) {
+        const isValid = await this.sessionService.doesSessionExistsByJwt(token);
+        if (!isValid) {
             throw new UnauthorizedException();
         }
         const result = super.canActivate(context);

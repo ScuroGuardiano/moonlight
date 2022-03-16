@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export default class User {
@@ -25,6 +25,9 @@ export default class User {
 
   @Column()
   joined: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   static create(username: string, email: string, hashedPassword: string): User {
     const user = new User();

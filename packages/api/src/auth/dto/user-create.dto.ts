@@ -1,5 +1,5 @@
 import { IsEmail, IsNotIn, IsString, Matches, MaxLength, MinLength } from "class-validator";
-import { DONT_USE_THOSE_PASSWORDS_YOU_DUMMY } from "../top-common-password";
+import { DONT_USE_THOSE_PASSWORDS_YOU_DUMMY } from "../helpers/top-common-password";
 
 export default class UserCreateDto {
   @IsString()
