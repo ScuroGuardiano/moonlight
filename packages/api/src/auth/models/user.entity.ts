@@ -1,4 +1,6 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import Permission from "src/authorization/models/permission.entity";
+import Role from "src/authorization/models/role.entity";
+import { BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export default class User {
@@ -28,6 +30,14 @@ export default class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToMany(() => Role, { eager: true })
+  @JoinTable()
+  roles: Role[];
+
+  @ManyToMany(() => Permission, { eager: true })
+  @JoinTable()
+  permissions: Permission[]
 
   static create(username: string, email: string, hashedPassword: string): User {
     const user = new User();

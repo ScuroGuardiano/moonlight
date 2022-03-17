@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CaslModule } from './casl/casl.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   imports: [
@@ -12,7 +14,9 @@ import { AuthModule } from './auth/auth.module';
       database: 'db.sqlite',
       synchronize: process.env.ENV === 'DEVELOPMENT'
     }),
-    AuthModule
+    AuthModule,
+    CaslModule,
+    AuthorizationModule
   ],
   controllers: [AppController],
   providers: [AppService],
