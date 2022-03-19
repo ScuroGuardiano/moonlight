@@ -1,5 +1,5 @@
 import User from "src/auth/models/user.entity";
-import { Action } from "src/casl/action";
+import { Action } from "src/authorization/action";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import Role from "./role.entity";
 
