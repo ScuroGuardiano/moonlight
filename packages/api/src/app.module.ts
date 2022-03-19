@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CaslModule } from './casl/casl.module';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { AnimeModule } from './anime/anime.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AuthorizationModule } from './authorization/authorization.module';
     }),
     AuthModule,
     CaslModule,
-    AuthorizationModule
+    AuthorizationModule,
+    AnimeModule
   ],
   controllers: [AppController],
   providers: [AppService],
