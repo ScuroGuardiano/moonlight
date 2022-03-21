@@ -15,6 +15,12 @@ export class UsersService {
     }
 
     const user = User.create(username, email, hashedPassword);
+
+    const isAnyUserInDatabase = await this.isAnyUserInDatabase();
+    if (!isAnyUserInDatabase) {
+      user.isAdmin = true;
+    }
+
     await this.userRepository.insert(user);
 
     return user;
@@ -22,6 +28,12 @@ export class UsersService {
 
   async getById(id: string): Promise<User> {
     return this.userRepository.findOne(id);
+  }
+
+  async getByIdWithRolesAndPermissions(id: string): Promise<User> {
+    return this.userRepository.findOne(id, {
+      relations: ["roles", "permissions"]
+    });
   }
 
   async getByUsername(username: string): Promise<User> {
@@ -32,10 +44,16 @@ export class UsersService {
     const user = await this.userRepository.findOne({
       where: [
         { email },
-        { username }
+        { usernameLower: username.toLowerCase() }
       ]
     });
 
+    return !!user;
+  }
+
+  async isAnyUserInDatabase() {
+    // It should be faster than using count. We're simply fetching one user.
+    const user = await this.userRepository.findOne();
     return !!user;
   }
 }

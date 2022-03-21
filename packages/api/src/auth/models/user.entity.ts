@@ -15,6 +15,11 @@ export default class User {
   @Column({
     unique: true
   })
+  usernameLower: string; 
+
+  @Column({
+    unique: true
+  })
   email: string;
 
   @Column({
@@ -25,23 +30,27 @@ export default class User {
   @Column()
   password: string;
 
+  @Column({ default: false })
+  isAdmin?: boolean;
+
   @Column()
   joined: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToMany(() => Role, { eager: true })
+  @ManyToMany(() => Role)
   @JoinTable()
   roles: Role[];
 
-  @ManyToMany(() => Permission, { eager: true })
+  @ManyToMany(() => Permission)
   @JoinTable()
   permissions: Permission[]
 
   static create(username: string, email: string, hashedPassword: string): User {
     const user = new User();
     user.username = username;
+    user.usernameLower = username.toLowerCase();
     user.password = hashedPassword;
     user.email = email;
 

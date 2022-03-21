@@ -26,14 +26,15 @@ import { LocalAuthGuard } from './local-auth.guard';
   ],
   exports: [
     UsersService,
+    SessionService,
     JwtAuthGuard
   ],
   providers: [
     AuthService,
+    SessionService,
     JwtStrategy,
     UsersService,
     LocalStrategy,
-    SessionService,
     JwtAuthGuard,
     LocalAuthGuard
   ],
