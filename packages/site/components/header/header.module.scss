@@ -1,0 +1,24 @@
+.header {
+  background: red;
+  display: flex;
+  justify-content: space-between;
+  h1 {
+    margin: 0 1rem .5rem .5rem;
+    padding: 0;
+  }
+  * {
+    color: yellow;
+  }
+}
+
+.auth {
+  height: 100%;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin-right: .5rem;
+  a {
+    border-width: 2px;
+    font-weight: bolder;
+  }
+}

@@ -25,7 +25,7 @@ export default class SeriesCreateDto {
   type?: AnimeType;
 
   @IsInt()
-  episodedCount: number;
+  episodesCount: number;
 
   @IsDateString()
   aired: string;

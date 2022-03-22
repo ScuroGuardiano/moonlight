@@ -1,6 +1,5 @@
-import { Expose, plainToInstance, Transform } from "class-transformer";
-import UserDto from "src/auth/dto/user-dto";
-import User from "src/auth/models/user.entity";
+import { Expose, instanceToPlain, plainToInstance, Transform } from "class-transformer";
+import UserPublicDto from "src/auth/dto/user-public-dto";
 import { AgeRating } from "../enums/age-rating";
 import { AnimeStatus } from "../enums/anime-status";
 import { AnimeType } from "../enums/anime-type";
@@ -13,12 +12,12 @@ export default class SeriesDto {
 
   @Expose()
   @Transform(({ value }) => {
-    if (value instanceof User) {
-      return UserDto.fromEntity(value);
+    if (value) {
+      return UserPublicDto.fromEntity(value);
     }
-    return value;
+    return null;
   })
-  addedBy: UserDto;
+  addedBy: UserPublicDto;
 
   @Expose()
   name: string;
@@ -41,7 +40,7 @@ export default class SeriesDto {
   @Expose()
   @Transform(({ value }) => {
     if (value instanceof Date) {
-      return value.toUTCString();
+      return value.toISOString();
     }
     return value;
   })
@@ -54,6 +53,6 @@ export default class SeriesDto {
   targetGroup?: TargetGroup;
 
   static fromEntity(entity: Series) {
-    return plainToInstance(SeriesDto, entity, { excludeExtraneousValues: true });
+    return plainToInstance(SeriesDto, instanceToPlain(entity), { excludeExtraneousValues: true });
   }
 }

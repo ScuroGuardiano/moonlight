@@ -1,4 +1,4 @@
 export enum AnimeStatus {
   AIRING = "Airing",
-  FINISHED_AIRING = "Finished airing"
+  FINISHED_AIRING = "Finished"
 }

@@ -6,6 +6,6 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "yarn api:start:dev"
+    "start": "yarn api:start:dev & yarn site:dev &"
   }
 }
