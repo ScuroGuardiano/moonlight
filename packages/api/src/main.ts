@@ -11,6 +11,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.set('trust proxy', true);
 
+  app.enableCors();
+
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     transform: true
