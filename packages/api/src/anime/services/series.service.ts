@@ -9,6 +9,13 @@ import Series from '../models/series.entity';
 export class SeriesService {
   constructor(@InjectRepository(Series) private seriesRepository: Repository<Series>) {}
 
+  /**
+   *  Will add a new series do the database
+   *
+   *  @param seriesDto dto with series data
+   *  @param userId user who added series
+   *  @returns added series entity
+   */
   async addNewSeries(seriesDto: SeriesCreateDto, userId: string): Promise<Series> {
     const series = plainToInstance(Series, seriesDto);
     series.addedById = userId;
